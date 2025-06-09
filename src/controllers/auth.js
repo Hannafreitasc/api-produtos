@@ -4,6 +4,7 @@ require('dotenv').config();
 const bcrypt = require ('bcrypt');
 
 async function login(req, res){
+    console.log(req.body);
     const { email, password } = req.body;
 
     try {
@@ -26,7 +27,7 @@ async function login(req, res){
         }
 
         const token = jwt.sign(
-            {id: user.id, email: email.id},
+            {id: user.id, email: user.email},
             process.env.JWT_SECRET,
             {expiresIn: process.env.JWT_EXPIRES_IN}
         )
